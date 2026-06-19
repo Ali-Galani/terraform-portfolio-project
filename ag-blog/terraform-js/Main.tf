@@ -45,7 +45,7 @@ resource "aws_s3_bucket_policy" "nextjs_bucket_policy" {
 
   policy = jsonencode({
     Version = "2012-10-17"
-    statement = [
+    Statement = [
       {
         Sid = "PublicReadGetObject"
         Effect = "Allow"
