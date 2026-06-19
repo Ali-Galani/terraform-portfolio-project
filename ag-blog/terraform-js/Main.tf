@@ -82,7 +82,7 @@ resource "aws_cloudfront_distribution" "nextjs_distribution" {
 
   default_cache_behavior {
     allowed_methods = [ "GET","HEAD","OPTIONS"]
-    cached_methods =  = ["GET","HEAD"]
+    cached_methods =  ["GET","HEAD"]
     target_origin_id = "S3-nextjs-pofolio-bucket"
 
     forwarded_values {
