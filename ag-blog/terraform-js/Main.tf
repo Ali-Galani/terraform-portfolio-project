@@ -69,7 +69,7 @@ resource "aws_cloudfront_distribution" "nextjs_distribution" {
     domain_name = aws_s3_bucket.nextjs_bucket.bucket_regional_domain_name
     origin_id = "S3-nextjs-portfolio-bucket"   
     
-    S3_origin_config {
+    s3_origin_config {
         origin_access_identity = aws_cloudfront_origin_acces_identity.origin_access_identity.cloudfront_access_identity_path       
     }
   }
