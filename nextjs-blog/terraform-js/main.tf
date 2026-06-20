@@ -1,3 +1,4 @@
+# Main
 #MAIN
 provider "aws" {
   region = "us-west-2"
@@ -48,11 +49,13 @@ resource "aws_s3_bucket_policy" "nextjs_bucket_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid = "PublicReadGetObject"
-        Effect = "Allow"
-        Principal = "*"
-        Action = "s3:GetObject"
-        Resource = "${aws_s3_bucket.nextjs_bucket.arn}/*"
+        Sid       = "AllowCloudFrontServicePrincipal"
+        Effect    = "Allow"
+        Principal = {
+            AWS = "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${aws_cloudfront_origin_access_identity.origin_access_identity.id}"
+        }
+        Action    = "s3:GetObject"
+        Resource  = "${aws_s3_bucket.nextjs_bucket.arn}/*"
       }
     ]
   })
