@@ -1,4 +1,3 @@
-# Main
 #MAIN
 provider "aws" {
   region = "us-west-2"
@@ -25,7 +24,6 @@ resource "aws_s3_bucket_public_access_block" "nextjs_bucket_public_access_block"
  block_public_policy = false 
  ignore_public_acls = false
  restrict_public_buckets = false 
-
 }
 
 # Bucket ACL
@@ -52,7 +50,7 @@ resource "aws_s3_bucket_policy" "nextjs_bucket_policy" {
         Sid       = "AllowCloudFrontServicePrincipal"
         Effect    = "Allow"
         Principal = {
-            AWS = "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${aws_cloudfront_origin_access_identity.origin_access_identity.id}"
+            AWS = aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn
         }
         Action    = "s3:GetObject"
         Resource  = "${aws_s3_bucket.nextjs_bucket.arn}/*"
